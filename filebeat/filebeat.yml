@@ -1,0 +1,27 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+
+filebeat:
+  inputs:
+    - type: log
+      enabled: true
+      paths:
+        - /logs/**/*.log
+      fields_under_root: true
+      json:
+        keys_under_root: true
+        add_error_key: true
+        overwrite_keys: false
+        message_key: message
+
+setup:
+  kibana:
+    host: "kibana:5601"
+
+output:
+  elasticsearch:
+    hosts: 'elasticsearch:9200'
+    username: 'elastic'
+    password: 'changeme'

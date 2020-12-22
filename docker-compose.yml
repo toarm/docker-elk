@@ -69,6 +69,22 @@ services:
     depends_on:
       - elasticsearch
 
+  filebeat:
+    build:
+      context: filebeat/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - type: bind
+        source: ${FILEBEAT_LOG_VOLUME_SOURCE}
+        target: /logs
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
+      - kibana
+      - logstash
+
 networks:
   elk:
     driver: bridge
