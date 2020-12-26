@@ -1,0 +1,15 @@
+heartbeat:
+  monitors:
+    - type: http
+      urls: [ "https://localhost:5555" ]
+      schedule: "@every 10s"
+
+output:
+  elasticsearch:
+    hosts: 'elasticsearch:9200'
+    username: 'elastic'
+    password: 'changeme'
+
+setup:
+  kibana:
+    host: "kibana:5601"

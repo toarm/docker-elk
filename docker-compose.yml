@@ -82,8 +82,16 @@ services:
       - elk
     depends_on:
       - elasticsearch
-      - kibana
-      - logstash
+
+  heartbeat:
+    build:
+      context: heartbeat/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    networks:
+      - elk
+    depends_on:
+      - elasticsearch
 
 networks:
   elk:
